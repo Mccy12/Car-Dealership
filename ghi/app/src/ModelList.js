@@ -12,7 +12,7 @@ function ModelList(props) {
             <tbody>
                 {props.models.map(model => {
                     return (
-                        <tr key={model.href}>
+                        <tr key={model.id}>
                             <td>{model.name}</td>
                             <td>{model.manufacturer.name}</td>
                         </tr>
