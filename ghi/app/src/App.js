@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import ModelList from './ModelList';
-import ModelsForm from './CreateModel';
+import ManufacturerForm from './CreateManufacturer';
+import ManufacturerList from './ManufacturersList';
+
 
 function App(props) {
   return (
@@ -13,6 +14,11 @@ function App(props) {
           <Route path="/" element={<MainPage />} />
           <Route path="/models" element={<ModelList models={props.carModels}/>} />
           <Route path="/models/new" element={<ModelsForm />} />
+          <Route path="manufacturers" element={<ManufacturerList manufacturers={props.manufacturers} />} />
+          <Route path="manufacturers">
+            <Route path="new" element={<ManufacturerForm />} />
+          </Route>
+
         </Routes>
       </div>
     </BrowserRouter>
