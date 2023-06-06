@@ -7,11 +7,11 @@ class Technician(models.Model):
     employee_id = models.CharField(max_length=100)
 
 class AutomobileVO(models.Model):
-    vin = models.PositiveBigIntegerField()
+    vin = models.CharField(max_length=100)
     sold = models.BooleanField()
 
 class Appointment(models.Model):
-    vin = models.PositiveBigIntegerField()
+    vin = models.CharField(max_length=100)
     customer = models.CharField(max_length=100)
     date_time = models.DateTimeField(auto_now_add=False)
     reason = models.CharField(max_length=200)

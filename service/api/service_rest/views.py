@@ -58,14 +58,14 @@ def technician_list(request, id=None):
         )
     else:
         content = json.loads(request.body)
-        try:
-            tech = Technician.objects.get(id=content["technician"])
-            content["technician"] = tech
-        except Technician.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid technician id"},
-                status=400,
-            )
+        # try:
+        #     tech = Technician.objects.get(id=content["technician"])
+        #     content["technician"] = tech
+        # except Technician.DoesNotExist:
+        #     return JsonResponse(
+        #         {"message": "Invalid technician id"},
+        #         status=400,
+        #     )
 
         technician = Technician.objects.create(**content)
         return JsonResponse(
