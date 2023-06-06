@@ -3,6 +3,8 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import ManufacturerForm from './CreateManufacturer';
 import ManufacturerList from './ManufacturersList';
+import ModelList from './ModelList';
+import ModelsForm from './CreateModel';
 
 
 function App(props) {
