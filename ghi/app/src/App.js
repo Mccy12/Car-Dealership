@@ -5,7 +5,7 @@ import ManufacturerForm from './CreateManufacturer';
 import ManufacturerList from './ManufacturersList';
 import ModelList from './ModelList';
 import ModelsForm from './CreateModel';
-
+import AutomobileForm from './CreateAutomobile';
 
 function App(props) {
   return (
@@ -19,6 +19,9 @@ function App(props) {
           <Route path="manufacturers" element={<ManufacturerList manufacturers={props.manufacturers} />} />
           <Route path="manufacturers">
             <Route path="new" element={<ManufacturerForm />} />
+          </Route>
+          <Route path="automobiles">
+            <Route path="new" element={<AutomobileForm />} />
           </Route>
 
         </Routes>
