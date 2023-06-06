@@ -21,7 +21,6 @@ def get_automobile():
             vin = automobile["vin"],
             sold = automobile["sold"],
         )
-        print(AutomobileVO.objects.all())
 
 
 
