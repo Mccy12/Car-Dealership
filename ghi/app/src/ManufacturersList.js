@@ -22,9 +22,7 @@ class ManufacturerList extends React.Component {
         return (
             <div>
                 <h1>Vehicle Manufacturers</h1>
-                <div className="d-grid gap-2 d-sm-flex justify-content-sm-right">
-                    <Link to="/manufacturers/new/" className="btn btn-primary btn-md px-4 gap-3">Add new manufacturer</Link>
-                </div>
+
                 <table className="table">
                     <thead>
                         <tr>
