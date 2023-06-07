@@ -1,44 +1,35 @@
-import React, {useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function ModelsForm () {
-    const [manufacturers, setManufacturers] = useState([]);
+function ModelsForm ({ loadCarModels, manufacturers }) {
 
     const [name, setName] = useState('');
     const [pictureUrl, setPictureUrl] = useState('');
-    const [manufacturer, setManufacturer] = useState('');
+    const [manufacturer, setManufacturer] = useState([]);
 
-    const handleNameChange = (e) => {
-        setName(e.target.value)
-    }
-    const handlePictureUrlChange = (e) => {
-        setPictureUrl(e.target.value)
-    }
-    const handleManufacturerChange = (e) => {
-        setManufacturer(e.target.value)
-    }
-
-    const fetchData = async () => {
-        const url = 'http://localhost:8100/api/manufacturers/'
-        const response = await fetch(url)
-
-        if (response.ok) {
-            const data = await response.json();
-            setManufacturers(data.manufacturers)
-        }
-    }
     useEffect(() => {
-        fetchData();
+        async function getManufacturers() {
+            const url = 'http://localhost:8100/api/manufacturers/';
+
+            const response = await fetch(url);
+
+            if (response.ok) {
+                const data = await response.json();
+                setManufacturer(data.manufacturers)
+            }
+        }
+        getManufacturers();
+
     }, [])
 
 
-    const handleSubmit = async (e) => {
+    async function handleModelSubmit(e)  {
         e.preventDefault();
 
-        const data = {}
-
-        data.name = name;
-        data.picture_url = pictureUrl;
-        data.manufacturer_id = manufacturer;
+        const data = {
+        name,
+        picture_url: pictureUrl,
+        manufacturer_id: manufacturer
+        }
 
         const addModelUrl = 'http://localhost:8100/api/models/'
         const fetchConfig = {
@@ -53,18 +44,31 @@ function ModelsForm () {
         if (response.ok) {
             const newModel = await response.json();
 
+            loadCarModels();
+
             setName('');
             setPictureUrl('');
             setManufacturer('');
         }
     }
 
+    const handleNameChange = (e) => {
+        setName(e.target.value)
+    }
+    const handlePictureUrlChange = (e) => {
+        setPictureUrl(e.target.value)
+    }
+    const handleManufacturerChange = (e) => {
+        setManufacturer(e.target.value)
+    }
+
+
     return (
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                     <h1>Create a model!</h1>
-                    <form onSubmit={handleSubmit} id="create-model-form">
+                    <form onSubmit={handleModelSubmit} id="create-model-form">
                         <div className="form-floating mb-3">
                             <input onChange={handleNameChange} value={name} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
                             <label htmlFor="name">Name</label>
