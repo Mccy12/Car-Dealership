@@ -1,6 +1,6 @@
 
 
-function ModelList(props) {
+function ModelList({models}) {
     return (
         <table className="table table-striped">
             <thead>
@@ -10,7 +10,7 @@ function ModelList(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.models.map(model => {
+                {models.map(model => {
                     return (
                         <tr key={model.id}>
                             <td>{model.name}</td>

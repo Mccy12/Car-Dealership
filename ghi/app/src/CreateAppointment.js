@@ -1,15 +1,63 @@
 import React, { useState, useEffect } from "react"
 
-function AppointmentForm() {
-
-    const [technicians, setTechnicians] = useState([])
+function AppointmentForm({ loadAppointments, technicians }) {
 
     const [vin, setVin] = useState('');
     const [customer, setCustomer] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
-    const [technician, setTechnician] = useState('');
+    const [technician, setTechnician] = useState([]);
     const [reason, setReason] = useState('');
+
+    useEffect(() => {
+        async function getTechnicians() {
+            const url = 'http://localhost:8080/api/technicians/'
+
+            const response = await fetch(url);
+
+            if (response.ok) {
+                const data = await response.json()
+                setTechnician(data.technicians)
+            }
+        }
+        getTechnicians();
+    }, []);
+
+
+    const handleAppointmentSubmit = async (e) => {
+        e.preventDefault();
+
+        const data = {
+        vin,
+        customer,
+        date_time: `${date} ${time}`,
+        technician,
+        reason,
+        }
+
+        const appointmentUrl = 'http://localhost:8080/api/appointments/'
+        const fetchConfig = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+        const response = await fetch(appointmentUrl, fetchConfig)
+
+        if (response.ok) {
+            const newAppointment = await response.json()
+
+            loadAppointments();
+
+            setVin('');
+            setCustomer('');
+            setDate('');
+            setTime('');
+            setTechnician('');
+            setReason('');
+        }
+    }
 
     const handleVinChange = (e) => {
         setVin(e.target.value)
@@ -30,51 +78,6 @@ function AppointmentForm() {
         setReason(e.target.value)
     }
 
-    const handleAppointmentSubmit = async (e) => {
-        e.preventDefault();
-
-        const data = {}
-
-        data.vin = vin;
-        data.customer = customer;
-        data.date_time = `${date} ${time}`
-        data.technician = technician;
-        data.reason = reason;
-
-        const appointmentUrl = 'http://localhost:8080/api/appointments/'
-        const fetchConfig = {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }
-        const response = await fetch(appointmentUrl, fetchConfig)
-
-        if (response.ok) {
-            const newAppointment = await response.json()
-            setVin('');
-            setCustomer('');
-            setDate('');
-            setTime('');
-            setTechnician('');
-            setReason('');
-        }
-    }
-
-    const fetchData = async () => {
-        const url = 'http://localhost:8080/api/technicians/'
-        const response = await fetch(url)
-
-        if (response.ok) {
-            const data = await response.json()
-            setTechnicians(data.technicians)
-        }
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     return (
         <div className="row">

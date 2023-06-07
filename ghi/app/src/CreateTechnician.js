@@ -1,30 +1,19 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 
-function TechnicianForm() {
+function TechnicianForm({ loadTechnicians }) {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [employeeID, setEmployeeID] = useState('');
 
-    const handleFirstNameVhange = (e) => {
-        setFirstName(e.target.value)
-    }
-    const handleLastNameChange = (e) => {
-        setLastName(e.target.value)
-    }
-    const handleEmployeeIDChange = (e) => {
-        setEmployeeID(e.target.value)
-    }
+    async function handleTechnicianSubmit(e) {
+        e.preventDefault()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const data = {}
-
-        data.first_name = firstName;
-        data.last_name = lastName;
-        data.employee_id = employeeID;
-
+        const data = {
+        first_name: firstName,
+        last_name: lastName,
+        employee_id: employeeID,
+        }
         const addTechnicianUrl = 'http://localhost:8080/api/technicians/'
         const fetchConfig = {
             method: 'POST',
@@ -39,20 +28,32 @@ function TechnicianForm() {
         if (response.ok) {
             const newTech = await response.json();
 
+            loadTechnicians();
+
             setFirstName('');
             setLastName('');
             setEmployeeID('');
         }
     }
+    const handleFirstNameChange = (e) => {
+        setFirstName(e.target.value)
+    }
+    const handleLastNameChange = (e) => {
+        setLastName(e.target.value)
+    }
+    const handleEmployeeIDChange = (e) => {
+        setEmployeeID(e.target.value)
+    }
+
 
     return (
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                     <h1>Add a technician</h1>
-                    <form onSubmit={handleSubmit} id="create-technician-form">
+                    <form onSubmit={handleTechnicianSubmit} id="create-technician-form">
                         <div className="form-floating mb-3">
-                            <input value={firstName} onChange={handleFirstNameVhange} placeholder="First Name" required type="text" name="first_name" id="first_name" className="form-control" />
+                            <input value={firstName} onChange={handleFirstNameChange} placeholder="First Name" required type="text" name="first_name" id="first_name" className="form-control" />
                             <label htmlFor="first_name" >First Name</label>
                         </div>
                         <div className="form-floating mb-3">
