@@ -29,7 +29,7 @@ class Appointment(models.Model):
         related_name="technician",
         on_delete=models.PROTECT
     )
-    
+
     def finish(self):
         status = Status.objects.get(name="FINISHED")
         self.status = status
