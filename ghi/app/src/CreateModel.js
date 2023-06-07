@@ -66,16 +66,16 @@ function ModelsForm () {
                     <h1>Create a model!</h1>
                     <form onSubmit={handleSubmit} id="create-model-form">
                         <div className="form-floating mb-3">
-                            <input onChange={handleNameChange} value={name} placeholder="Name" required type="text" name="name" id="name"/>
-                            <label htmlFor="name"></label>
+                            <input onChange={handleNameChange} value={name} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
+                            <label htmlFor="name">Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={handlePictureUrlChange} value={pictureUrl} placeholder="Put a url here!" required type="text" name="picture_url" id="picture_url"/>
-                            <label htmlFor="picture_url"></label>
+                            <input onChange={handlePictureUrlChange} value={pictureUrl} placeholder="Put a url here!" required type="text" name="picture_url" id="picture_url" className="form-control"/>
+                            <label htmlFor="picture_url">Picture URL</label>
                         </div>
 
                         <div className="mb-3">
-                            <select onChange={handleManufacturerChange} required id="manufacturer" name="manufacturer">
+                            <select onChange={handleManufacturerChange} required id="manufacturer" name="manufacturer" className="form-control">
                                 <option value="">Choose a manufacturer</option>
                                 {manufacturers.map(manufacturer => {
                                     return (
