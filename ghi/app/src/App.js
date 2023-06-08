@@ -16,6 +16,7 @@ import SalesPersonForm from './SalesPersonForm';
 import SalepeopleList from './SalepeopleList';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
+import { SearchBar } from './Search';
 import { useEffect, useState } from 'react';
 
 function App(props) {
@@ -24,6 +25,7 @@ function App(props) {
   const [technicians, setTechnicians] = useState([])
   const [appointments, setAppointments] = useState([])
   const [automobiles, setAutomobiles] = useState([])
+
 
   async function getAutomobiles() {
     const response = await fetch('http://localhost:8100/api/automobiles/')

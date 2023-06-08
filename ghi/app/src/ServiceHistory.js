@@ -1,7 +1,13 @@
+import { useState } from "react";
+
 
 function ServiceList({ appointments }) {
 
+    const [query, setQuery] = useState('')
+
     return(
+        <div>
+        <input type="text" placeholder="Search" className="Search" onChange={e=> setQuery(e.target.value)} />
         <table className="table table-striped">
             <thead>
                 <tr>
@@ -17,7 +23,7 @@ function ServiceList({ appointments }) {
             </thead>
             <tbody>
 
-                {appointments.map(appointment => {
+                {appointments.filter(appointment=>appointment.vin.includes(query)).map(appointment => {
                     let date = new Date(appointment.date_time).toLocaleDateString()
                     let time = new Date(appointment.date_time).toLocaleTimeString()
 
@@ -38,6 +44,7 @@ function ServiceList({ appointments }) {
                 })}
             </tbody>
         </table>
+    </div>
     );
 }
 
