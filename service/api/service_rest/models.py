@@ -14,7 +14,6 @@ class Technician(models.Model):
 
 class AutomobileVO(models.Model):
     vin = models.CharField(max_length=100)
-    sold = models.BooleanField()
 
 class Appointment(models.Model):
 
@@ -23,6 +22,8 @@ class Appointment(models.Model):
     date_time = models.DateTimeField(auto_now_add=False)
     reason = models.CharField(max_length=200)
     status = models.CharField(max_length=200, null=True)
+    is_vip = models.BooleanField(null=True)
+    
 
     technician = models.ForeignKey(
         Technician,

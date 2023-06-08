@@ -17,7 +17,9 @@ git clone <<repository.url.here>>
 docker volume create beta-data
 docker-compose build
 docker-compose up
+
 ​```
+
 **If running on MacOS, you will see an error warning about an environment variable names OS missing. You can ignore this.**
 
 -After running these commands, make sure your Docker containers are running.

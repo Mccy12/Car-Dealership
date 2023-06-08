@@ -11,6 +11,7 @@ import TechnicianForm from './CreateTechnician';
 import AppointmentForm from './CreateAppointment';
 import TechnicianList from './TechnicianList';
 import AppointmentList from './AppointmentList';
+import ServiceList from './ServiceHistory';
 import SalesPersonForm from './SalesPersonForm';
 import SalepeopleList from './SalepeopleList';
 import CustomerForm from './CustomerForm';
@@ -25,6 +26,17 @@ function App(props) {
   const [manufacturers, setManufacturers] = useState([]);
   const [technicians, setTechnicians] = useState([])
   const [appointments, setAppointments] = useState([])
+  const [automobiles, setAutomobiles] = useState([])
+
+  async function getAutomobiles() {
+    const response = await fetch('http://localhost:8100/api/automobiles/')
+      if (response.ok) {
+        const data = await response.json();
+        setAutomobiles(data.automobiles)
+      } else {
+        console.error(response)
+      }
+    }
 
   async function getAppointments() {
     const response = await fetch('http://localhost:8080/api/appointments/')
@@ -55,6 +67,16 @@ function App(props) {
         console.error(response);
       }
     }
+
+async function loadAutomobiles() {
+  const response = await fetch('http://localhost:8100/api/automobiles/')
+    if (response.ok) {
+      const data = await response.json();
+      setAutomobiles(data.automobiles)
+    } else {
+      console.error(response)
+    }
+  }
 
 async function loadAppointments() {
   const response = await fetch('http://localhost:8080/api/appointments/')
@@ -90,9 +112,11 @@ async function loadCarModels() {
     getTechnicians();
     getManufacturers();
     getAppointments();
+    getAutomobiles();
     loadCarModels();
     loadTechnicians();
     loadAppointments();
+    loadAutomobiles();
   }, []);
 
   return (
@@ -105,7 +129,8 @@ async function loadCarModels() {
           <Route path="/models/new" element={<ModelsForm manufacturers={manufacturers} loadCarModels={loadCarModels} />} />
           <Route path="/technicians" element={<TechnicianList technicians={technicians} />}/>
           <Route path="/technicians/new" element={<TechnicianForm loadTechnicians={loadTechnicians} />} />
-          <Route path="/appointments" element={<AppointmentList appointments={appointments} />} />
+          <Route path="/appointments" element={<AppointmentList loadAppointments={loadAppointments} automobiles={automobiles} appointments={appointments} />} />
+          <Route path="appointments/history" element={<ServiceList appointments={appointments} />} />
           <Route path="/appointments/new" element={<AppointmentForm loadAppointments={loadAppointments} technicians={technicians}/>} />
           <Route path="manufacturers" element={<ManufacturerList manufacturers={props.manufacturers} />} />
           <Route path="manufacturers">
