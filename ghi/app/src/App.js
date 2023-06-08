@@ -11,6 +11,10 @@ import TechnicianForm from './CreateTechnician';
 import AppointmentForm from './CreateAppointment';
 import TechnicianList from './TechnicianList';
 import AppointmentList from './AppointmentList';
+import SalesPersonForm from './SalesPersonForm';
+import SalepeopleList from './SalepeopleList';
+import CustomerForm from './CustomerForm';
+import CustomerList from './CustomerList';
 import { useEffect, useState } from 'react';
 
 function App(props) {
@@ -108,7 +112,14 @@ async function loadCarModels() {
           <Route path="automobiles">
             <Route path="new" element={<AutomobileForm />} />
           </Route>
-
+          <Route path="salespeople" element={<SalepeopleList salespeople={props.salespeople} />} />
+          <Route path="salespeople">
+              <Route path="new" element={<SalesPersonForm/>} />
+          </Route>
+          <Route path="customers" element={<CustomerList customers={props.customers} />} />
+          <Route path="customers">
+              <Route path="new" element={<CustomerForm/>} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
