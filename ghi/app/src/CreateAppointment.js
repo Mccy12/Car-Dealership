@@ -33,6 +33,7 @@ function AppointmentForm({ loadAppointments, technicians }) {
         date_time: `${date} ${time}`,
         technician,
         reason,
+        status: "PENDING"
         }
 
         const appointmentUrl = 'http://localhost:8080/api/appointments/'

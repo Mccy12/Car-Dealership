@@ -8,7 +8,7 @@ from common.json import ModelEncoder
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["vin", "sold"]
+    properties = ["vin"]
 
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
@@ -28,10 +28,12 @@ class AppointmentListEncoder(ModelEncoder):
         "date_time",
         "reason",
         "status",
-        "technician"
+        "technician",
+        "is_vip"
+
     ]
     encoders = {
-        "technician": TechnicianListEncoder
+        "technician": TechnicianListEncoder(),
     }
 
 
@@ -45,12 +47,18 @@ class AppointmentDetailEncoder(ModelEncoder):
         "reason",
         "status",
         "technician",
+        "is_vip",
+
+
     ]
     encoders = {
         "technician": TechnicianListEncoder(),
     }
-    def get_extra_data(self, o):
-        return {"is_vip": AutomobileVO.objects.exists()}
+    # def get_extra_data(self, o):
+    #     if self["vin"] == AutomobileVO.objects.all().keys():
+    #         return {"is_vip": "Yes"}
+    #     else:
+    #         return {"is_vip": "No"}
 
 
 @require_http_methods(["GET", "POST"])
@@ -105,7 +113,7 @@ def appointment_list(request, id=None):
             appointments = Appointment.objects.filter(id=id)
         return JsonResponse(
             {"appointments": appointments},
-            encoder=AppointmentDetailEncoder
+            encoder=AppointmentListEncoder
         )
     else:
         content = json.loads(request.body)
@@ -113,12 +121,12 @@ def appointment_list(request, id=None):
             technician_id = content["technician"]
             technician = Technician.objects.get(id=technician_id)
             content["technician"] = technician
+            content["is_vip"] = AutomobileVO.objects.exists()
         except Technician.DoesNotExist:
             return JsonResponse(
                 {"error": "Technician does not exist"},
                 status=404
             )
-        print(content)
         appointment = Appointment.objects.create(**content)
         return JsonResponse(
             appointment,
