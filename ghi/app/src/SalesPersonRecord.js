@@ -51,7 +51,7 @@ class SalesPersonRecord extends React.Component {
                             <th>Sales Person</th>
                             <th>Employee ID</th>
                             <th>Customer</th>
-                            <th>Vehicle VIN</th>
+                            <th>VIN</th>
                             <th>Price</th>
                         </tr>
                     </thead>
@@ -60,9 +60,9 @@ class SalesPersonRecord extends React.Component {
                             sale=> sale.sales_person.id.toString() === this.state.sales_person).map(sale => {
                             return (
                                 <tr key={sale.id}>
-                                    <td>{sale.sales_person.first_name}</td>
+                                    <td>{sale.sales_person.first_name} {sale.sales_person.last_name}</td>
                                     <td>{sale.sales_person.employee_id}</td>
-                                    <td>{sale.customer.first_name}</td>
+                                    <td>{sale.customer.first_name} {sale.customer.last_name}</td>
                                     <td>{sale.automobile.vin}</td>
                                     <td>${sale.price}</td>
                                 </tr>
