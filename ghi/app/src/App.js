@@ -16,7 +16,6 @@ import SalesPersonForm from './SalesPersonForm';
 import SalepeopleList from './SalepeopleList';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
-import { SearchBar } from './Search';
 import SaleForm from './SaleForm';
 import SaleList from './SaleList';
 import SalesPersonRecord from './SalesPersonRecord';
