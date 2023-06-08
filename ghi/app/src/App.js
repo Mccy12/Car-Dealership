@@ -17,6 +17,9 @@ import SalepeopleList from './SalepeopleList';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
 import { SearchBar } from './Search';
+import SaleForm from './SaleForm';
+import SaleList from './SaleList';
+import SalesPersonRecord from './SalesPersonRecord';
 import { useEffect, useState } from 'react';
 
 function App(props) {
@@ -147,6 +150,11 @@ async function loadCarModels() {
           <Route path="customers">
               <Route path="new" element={<CustomerForm/>} />
           </Route>
+          <Route path="sales" element={<SaleList saless={props.sales} />} />
+          <Route path="sales">
+              <Route path="new" element={<SaleForm/>} />
+          </Route>
+          <Route path="salesperson" element={<SalesPersonRecord/>} />
         </Routes>
       </div>
     </BrowserRouter>
