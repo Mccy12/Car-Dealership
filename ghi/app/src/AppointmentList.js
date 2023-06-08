@@ -4,6 +4,7 @@ function AppointmentList({ appointments }) {
             <thead>
                 <tr>
                     <th>Vin</th>
+                    <th>Is Vip?</th>
                     <th>Customer</th>
                     <th>Date</th>
                     <th>Time</th>
@@ -14,13 +15,18 @@ function AppointmentList({ appointments }) {
             <tbody>
 
                 {appointments.map(appointment => {
+                    let date = new Date(appointment.date_time).toLocaleDateString()
+                    let time = new Date(appointment.date_time).toLocaleTimeString()
+
                     return (
+
                         <tr key={appointment.id}>
                             <td>{ appointment.vin }</td>
+                            <td>{ appointment.is_vip ? 'Yes' : 'No' }</td>
                             <td>{ appointment.customer }</td>
-                            <td>{ appointment.date }</td>
-                            <td>{ appointment.time }</td>
-                            <td>{ appointment.technician }</td>
+                            <td>{ date }</td>
+                            <td>{ time }</td>
+                            <td>{ `${appointment.technician.first_name} ${appointment.technician.last_name}`}</td>
                             <td>{ appointment.reason }</td>
 
                         </tr>

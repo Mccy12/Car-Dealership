@@ -27,9 +27,9 @@ class Appointment(models.Model):
     technician = models.ForeignKey(
         Technician,
         related_name="technician",
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
-    
+
     def finish(self):
         status = Status.objects.get(name="FINISHED")
         self.status = status

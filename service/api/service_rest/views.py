@@ -27,8 +27,12 @@ class AppointmentListEncoder(ModelEncoder):
         "customer",
         "date_time",
         "reason",
-        "status"
+        "status",
+        "technician"
     ]
+    encoders = {
+        "technician": TechnicianListEncoder
+    }
 
 
 class AppointmentDetailEncoder(ModelEncoder):
@@ -45,8 +49,8 @@ class AppointmentDetailEncoder(ModelEncoder):
     encoders = {
         "technician": TechnicianListEncoder(),
     }
-    # def get_extra_data(self, o):
-    #     return {"status": o.statu}
+    def get_extra_data(self, o):
+        return {"is_vip": AutomobileVO.objects.exists()}
 
 
 @require_http_methods(["GET", "POST"])
@@ -101,7 +105,7 @@ def appointment_list(request, id=None):
             appointments = Appointment.objects.filter(id=id)
         return JsonResponse(
             {"appointments": appointments},
-            encoder=AppointmentListEncoder
+            encoder=AppointmentDetailEncoder
         )
     else:
         content = json.loads(request.body)
@@ -129,7 +133,7 @@ def delete_appointment(request, id):
         appointment.delete()
         return JsonResponse(
             appointment,
-            encoder=AppointmentListEncoder,
+            encoder=AppointmentDetailEncoder,
             safe=False
         )
     except Appointment.DoesNotExist:
