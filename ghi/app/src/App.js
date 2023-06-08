@@ -28,6 +28,7 @@ function App(props) {
   const [appointments, setAppointments] = useState([])
   const [automobiles, setAutomobiles] = useState([])
 
+
   async function getAutomobiles() {
     const response = await fetch('http://localhost:8100/api/automobiles/')
       if (response.ok) {
