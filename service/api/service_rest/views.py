@@ -133,7 +133,7 @@ def delete_appointment(request, id):
         appointment.delete()
         return JsonResponse(
             appointment,
-            encoder=AppointmentListEncoder,
+            encoder=AppointmentDetailEncoder,
             safe=False
         )
     except Appointment.DoesNotExist:
