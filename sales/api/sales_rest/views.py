@@ -1,4 +1,4 @@
-from django.shortcuts import render
+
 from django.views.decorators.http import require_http_methods
 import json
 from django.http import JsonResponse
@@ -77,27 +77,33 @@ class SaleEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def api_list_salesperson(request):
     if request.method == "GET":
-        sales_staff = SalesPerson.objects.all()
+        salespeople = SalesPerson.objects.all()
         return JsonResponse(
-            {"sales_staff": sales_staff},
+            {"salespeople": salespeople},
             encoder=SalesPersonEncoder,
             safe=False,
         )
     else:
-        content = json.loads(request.body)
-        sales_person = SalesPerson.objects.create(**content)
-        return JsonResponse(
-            sales_person,
-            encoder=SalesPersonEncoder,
-            safe=False,
+        try:
+            content = json.loads(request.body)
+            sales_person = SalesPerson.objects.create(**content)
+            return JsonResponse(
+                sales_person,
+                encoder=SalesPersonEncoder,
+                safe=False,
         )
-
+        except:
+            response = JsonResponse(
+                {"message": "Cannot be created"}
+            )
+            response.status_code = 400
+            return response
 
 @require_http_methods(["GET", "DELETE"])
-def api_show_salesperson(request, id):
+def api_show_salesperson(request, pk):
     if request.method == "GET":
         try:
-            sales_person = SalesPerson.objects.get(id=id)
+            sales_person = SalesPerson.objects.get(id=pk)
             return JsonResponse(
                 sales_person,
                 encoder=SalesPersonEncoder,
