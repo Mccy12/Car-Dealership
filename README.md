@@ -432,3 +432,133 @@ Delete appointment: This will delete the appointment at the given id. The respon
 ​
 ## Value Objects
  - Identification of value objects for each service goes here
+
+## Sales microservice
+The Sales Microservice is able to create customers, salespeople and a sale. Customers and Salepeople are both included in the characteristics of a sale of automobiles. It also lists customers, salespeople, sales, and salespeople history. It should also poll from autmobile data by the VIN to create sales as well as salespeople history.
+
+
+Within the Sales microservice there are four models:
+
+1. AutomobileVO
+
+    - Value Object that represents the VIN and sold of the automobile model which is polled from the microservice.
+
+2. Customer
+
+    - The customers first name, last name, address, and phone number
+
+3. SalesPerson
+
+    - The Sales Person's first name, last name and employee id
+
+4. Sales
+
+    - Already registered salesperson, customer, and automobile are required for this sale, as well as the price of the the automobile.
+
+__Sales Port: 8090__
+
+***Customer RESTful API endpoints***
+| Request Method  | Url                         | Action                                  |
+| ----------------|:---------------------------:| :--------------------------------------------:|
+| GET             | /api/customers    | Obtains a list of customers         |
+| POST            | /api/customers    | Creates a new customer     |
+| GET             | /api/customers/id# | Obtains individual customer's details |
+
+example JSON
+```json
+{
+	"name": "Josh Contreras",
+	"address": "123 main",
+	"phone_number": 123456789
+}
+```
+
+example output
+```json
+{
+	"first_name": "Josh",
+	"last_name": "Contreras",
+	"address": "123 main street",
+	"phone_number": 123456789,
+	"id": 1
+}
+```
+
+
+</br>
+</br>
+
+***SalesPerson RESTful API endpoints***
+| Request Method  | Url                   | What it does                            |
+| ----------------|:---------------------:| :--------------------------------------:|
+| GET             | /api/salespeople/    | Obtains a list of salespeople          |
+| POST            | /api/salespeople/    | Creates a new salesperson     |
+| GET             | /api/salesperson/id# | Sales Person details |
+
+example JSON
+```json
+{
+	"first_name": "Josh",
+	"last_name": "Contreras",
+	"employee_id": 117
+}
+```
+
+example output
+```json
+{
+	"first_name": "Josh",
+	"last_name": "Contreras",
+	"employee_id": 117,
+	"id": 1
+}
+```
+
+</br>
+</br>
+
+***SalesPersonRecord RESTful API endpoints***
+| Request Method  | Url                   | Action                            |
+| ----------------|:---------------------:| :--------------------------------------:|
+| GET             | /api/sales/     | List sales          |
+| POST            | /api/sales/     | Creates a new sale      |
+| GET             | /api/sales/id#  | Obtains individual sale details  |
+| DELETE          | /api/sales/id#  | Deletes a sale record    |
+
+example JSON
+```json
+{
+	"sales_person": 1,
+	"customer": 1,
+	"automobile": "12345",
+	"price": "117000"
+}
+```
+
+example output
+```json
+{
+	"sales_person": {
+		"first_name": "Josh",
+		"last_name": "Contreras",
+		"employee_id": 117,
+		"id": 1
+	},
+	"customer": {
+		"first_name": "Josh",
+		"last_name": "Contreras",
+		"address": "123 main street",
+		"phone_number": 123456789,
+		"id": 1
+	},
+	"automobile": {
+		"vin": "12345",
+		"color": "blue",
+		"year": 2019,
+		"sold": false,
+		"id": 1
+	},
+	"price": "117000",
+	"id": 1
+}
+```
