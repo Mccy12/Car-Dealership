@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import { NavLink } from 'react-router-dom';
 
 function Nav() {
@@ -10,72 +10,85 @@ function Nav() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 flex-wrap">
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to='/models'>
-                Models
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to='/models/new'>Create a Model</NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/manufacturers">
-                  Manufacturers
-                </NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/manufacturers/new/">Create a Manufacturer</NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/automobiles">
-                  Automobiles
-                </NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/automobiles/new/">Create an Automobile</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/technicians">
-                Technicians
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/technicians/new">
-                Add a Technician
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/appointments">Service Appointments</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/appointments/new">Create a Service Appointment</NavLink>
-            </li>
-            <li className="nav-item">
-            <NavLink className="nav-link" aria-current="page" to="/appointments/history">Service History</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/salespeople">Salespeople</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/salespeople/new">Add a Salesperson</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/customers">Customers</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/customers/new">Add a Customer</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/sales">Sales</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/sales/new">Add a New Sale</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/salesperson">Sales Record</NavLink>
-            </li>
-          </ul>
+          <div className="dropdown">
+            <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              Inventory
+            </a>
+            <div className="dropdown-menu">
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className=" nav-link" to='/models'> Models</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/models/new'>New Models</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/manufacturers'>Manufacturer</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/manufacturers/new'>New Manufacturer</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/automobiles'>Automobiles</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/automobiles/new'>New Automobile</NavLink>
+              </div>
+            </div>
+          </div>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="dropdown">
+            <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              Sales
+            </a>
+            <div className="dropdown-menu">
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className=" nav-link" to='/salespeople'> Salespeople</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/salespeople/new'>Add a Salesperson</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className=" nav-link" to='/salesperson'>Salespeople History</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/customers'>Customers</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/customers/new'>Add a Customer</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/sales'>Sales</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/sales/new'>Add a Sale</NavLink>
+              </div>
+            </div>
+          </div>
+          <div className="dropdown">
+            <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <div className="dropdown-menu">
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className=" nav-link" to='/technicians'> Technicians</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/technicians/new'>Add a Technician</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/appointments'>Appointments</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/appointments/new'>Schedule an Appointment</NavLink>
+              </div>
+              <div className="dropdown-item" style={{padding: "0"}}>
+                <NavLink className="nav-link" to='/appointments/history'>Service History</NavLink>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
         </div>
       </div>
     </nav>

@@ -126,34 +126,33 @@ async function loadCarModels() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+
           <Route path="/models" element={<ModelList models={models} />} />
-          <Route path="/models/new" element={<ModelsForm manufacturers={manufacturers} loadCarModels={loadCarModels} />} />
+          <Route path="/models/new" element={<ModelsForm manufacturers={manufacturers} loadCarModels={loadCarModels} getManufacturers={getManufacturers} />} />
+
           <Route path="/technicians" element={<TechnicianList technicians={technicians} />}/>
           <Route path="/technicians/new" element={<TechnicianForm loadTechnicians={loadTechnicians} />} />
+
           <Route path="/appointments" element={<AppointmentList loadAppointments={loadAppointments} appointments={appointments} />} />
           <Route path="appointments/history" element={<ServiceList appointments={appointments} />} />
           <Route path="/appointments/new" element={<AppointmentForm loadAppointments={loadAppointments} technicians={technicians}/>} />
-          <Route path="manufacturers" element={<ManufacturerList manufacturers={props.manufacturers} />} />
-          <Route path="manufacturers">
-            <Route path="new" element={<ManufacturerForm />} />
-          </Route>
-          <Route path="automobiles" element={<AutomobileList automobiles={props.automobiles} />} />
-          <Route path="automobiles">
-            <Route path="new" element={<AutomobileForm />} />
-          </Route>
-          <Route path="salespeople" element={<SalepeopleList salespeople={props.salespeople} />} />
-          <Route path="salespeople">
-              <Route path="new" element={<SalesPersonForm/>} />
-          </Route>
-          <Route path="customers" element={<CustomerList customers={props.customers} />} />
-          <Route path="customers">
-              <Route path="new" element={<CustomerForm/>} />
-          </Route>
-          <Route path="sales" element={<SaleList saless={props.sales} />} />
-          <Route path="sales">
-              <Route path="new" element={<SaleForm/>} />
-          </Route>
-          <Route path="salesperson" element={<SalesPersonRecord/>} />
+
+          <Route path="/manufacturers" element={<ManufacturerList manufacturers={props.manufacturers} />} />
+          <Route path="/manufacturers/new" element={<ManufacturerForm />} />
+
+          <Route path="/automobiles" element={<AutomobileList automobiles={props.automobiles} />} />
+          <Route path="/automobiles/new" element={<AutomobileForm />} />
+
+          <Route path="/salespeople" element={<SalepeopleList salespeople={props.salespeople} />} />
+          <Route path="/salespeople/new" element={<SalesPersonForm/>} />
+
+          <Route path="/customers" element={<CustomerList customers={props.customers} />} />
+          <Route path="/customers/new" element={<CustomerForm/>} />
+
+          <Route path="/sales" element={<SaleList saless={props.sales} />} />
+          <Route path="/sales/new" element={<SaleForm/>} />
+
+          <Route path="/salesperson" element={<SalesPersonRecord/>} />
         </Routes>
       </div>
     </BrowserRouter>

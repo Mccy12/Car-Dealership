@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-function ModelsForm ({ loadCarModels, manufacturers }) {
+function ModelsForm ({ loadCarModels, manufacturers, getManufacturers }) {
 
     const [name, setName] = useState('');
     const [pictureUrl, setPictureUrl] = useState('');
     const [manufacturer, setManufacturer] = useState([]);
 
     useEffect(() => {
-        async function getManufacturers() {
-            const url = 'http://localhost:8100/api/manufacturers/';
-
-            const response = await fetch(url);
-
-            if (response.ok) {
-                const data = await response.json();
-                setManufacturer(data.manufacturers)
-            }
-        }
+       
         getManufacturers();
 
     }, [])
