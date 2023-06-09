@@ -51,26 +51,28 @@ class SaleEncoder(ModelEncoder):
     }
 
 
-# @require_http_methods(["GET"])
-# def api_list_automobileVO(request):
-#     if request.method == "GET":
-#         autos = AutomobileVO.objects.all()
-#         return JsonResponse(
-#             {"autos": autos},
-#             encoder=AutomobileVOEncoder,
-#         )
+@require_http_methods(["GET"])
+def api_list_automobileVO(request):
+    if request.method == "GET":
+        autos = AutomobileVO.objects.filter(sold=False)
+        return JsonResponse(
+            {"autos": autos},
+            encoder=AutomobileVOEncoder,
+        )
 
 
-# @require_http_methods(["PUT"])
-# def sold_auto(request, id):
-#     if request.method == "PUT":
-#         auto = AutomobileVO.objects.get(id=id)
-#         auto.auto_sold
-#         return JsonResponse(
-#             auto,
-#             encoder=AutomobileVOEncoder,
-#             safe=False,
-#         )
+@require_http_methods(["PUT"])
+def sold_auto(request, vin):
+    if request.method == "PUT":
+        data = json.loads(request.body)
+        AutomobileVO.objects.filter(vin=vin).update(**data)
+        auto = AutomobileVO.objects.get(vin=vin)
+        return JsonResponse(
+            auto,
+            encoder=AutomobileVOEncoder,
+            safe=False,
+            status=200,
+        )
 
 
 

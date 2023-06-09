@@ -19,6 +19,7 @@ class SaleForm extends React.Component {
         delete data.salespeople
         delete data.customers
         delete data.automobiles
+
         console.log(data)
         const salesUrl = 'http://localhost:8090/api/sales/'
         const fetchConfig = {
@@ -34,7 +35,7 @@ class SaleForm extends React.Component {
             console.log(newSale)
 
             const cleared = {
-                name: '',
+                price: '',
                 sales_person: '',
                 customer: '',
                 automobile: '',
