@@ -24,7 +24,6 @@ class ManufacturerForm extends React.Component {
         }
         const response = await fetch(ManufacturerUrl, fetchConfig);
         if (response.ok) {
-            const newManufacturer = await response.json();
 
 
             const cleared = {
