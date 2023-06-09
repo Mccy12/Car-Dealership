@@ -1,5 +1,5 @@
 # CarCar
-*********DELETE THIS LATER BUT YOU STILL NEED TO ADD THE DIAGRAM
+
 CarCar is an application for handling your dealership needs. It can manage inventory, sales, and services for your automobiles.
 
 Team:
@@ -25,14 +25,17 @@ docker-compose up
 
 -You can view the project in your browser at http://localhost:3000/
 ![CarCar](/images/Car-Car.png)
-## Diagram
+# Diagram
 
+![Diagram](/images/Project-Beta-Diagram.png)
 ​
-## API Documentation
+# API Documentation
 
 The following is how you can access endpoints to send and view data. This can be done through both your browser, and through Insomnia.
-​
-##Manufacturers:
+​</br>
+</br>
+
+## Manufacturers:
 | Action | Method | URL |
 |:----: | :----: | :----: |
 |List Manufacturers | GET | http://localhost:8100/api/manufacturers/ |
@@ -70,7 +73,7 @@ When getting a list of the manufacturers, the JSON object will look like the fol
 }
 ```
 
-##Car Models
+## Car Models
 | Action | Method | URL |
 |:----: | :----: | :----: |
 |List Models | GET | http://localhost:8100/api/models/ |
@@ -146,7 +149,7 @@ This will return the following JSON:
 }
 ```
 
-##Automobiles
+## Automobiles
 | Action | Method | URL |
 |:----: | :----: | :----: |
 |List Automobiles | GET | http://localhost:8100/api/automobiles/ |
@@ -232,7 +235,7 @@ Update Automobile:
 ##Service Microservice
 -This microserver tracks both the technicians who service the cars, and the appointments customers make. It allows you to input which technician will be working on a particular customers car, along with the cars information. It will also track VIP status, which is determined by if the car was sold at this dealership.
 
-##Technicians
+## Technicians
 | Action | Method | URL |
 |:----: | :----: | :----: |
 |List Technicians | GET | http://localhost:8100/api/technicians/ |
@@ -296,7 +299,7 @@ Delete a Technician: This will delete a technician and their information from th
 ```
 The id field returns null, showing it has been removed from the database, as well as the details of the specific technician.
 
-##Appointments
+## Appointments
 | Action | Method | URL |
 |:----: | :----: | :----: |
 |List Appointments | GET | http://localhost:8100/api/appointments/ |
