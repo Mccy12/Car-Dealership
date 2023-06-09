@@ -2,6 +2,8 @@ function AppointmentList({ appointments, loadAppointments }) {
 
 
     return(
+        <div>
+        <h1>Service Appointments</h1>
         <table className="table table-striped">
             <thead>
                 <tr>
@@ -64,6 +66,7 @@ function AppointmentList({ appointments, loadAppointments }) {
                 })}
             </tbody>
         </table>
+        </div>
     );
 }
 

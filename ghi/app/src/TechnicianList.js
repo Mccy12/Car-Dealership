@@ -1,5 +1,7 @@
 function TechnicianList({ technicians }) {
     return(
+        <div>
+        <h1>Technicians</h1>
         <table className="table table-striped">
             <thead>
                 <tr>
@@ -22,6 +24,7 @@ function TechnicianList({ technicians }) {
                 })}
             </tbody>
         </table>
+        </div>
     );
 }
 
