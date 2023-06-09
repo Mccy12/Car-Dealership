@@ -13,7 +13,7 @@ class ManufacturerForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = { ...this.state };
-        console.log(data)
+
         const ManufacturerUrl = 'http://localhost:8100/api/manufacturers/'
         const fetchConfig = {
             method: "post",
@@ -25,7 +25,7 @@ class ManufacturerForm extends React.Component {
         const response = await fetch(ManufacturerUrl, fetchConfig);
         if (response.ok) {
             const newManufacturer = await response.json();
-            console.log(newManufacturer)
+
 
             const cleared = {
                 name: '',

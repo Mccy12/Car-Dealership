@@ -19,7 +19,7 @@ class CustomerForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = { ...this.state };
-        console.log(data)
+
         const customerUrl = 'http://localhost:8090/api/customers/'
         const fetchConfig = {
             method: "post",
@@ -30,8 +30,8 @@ class CustomerForm extends React.Component {
         }
         const response = await fetch(customerUrl, fetchConfig);
         if (response.ok) {
-            const newCustomer = await response.json();
-            console.log(newCustomer)
+
+
 
             const cleared = {
                 first_name:'',
