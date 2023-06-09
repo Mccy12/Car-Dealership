@@ -17,8 +17,7 @@ git clone <<repository.url.here>>
 docker volume create beta-data
 docker-compose build
 docker-compose up
-
-​```
+```
 
 **If running on MacOS, you will see an error warning about an environment variable names OS missing. You can ignore this.**
 
@@ -45,13 +44,13 @@ The following is how you can access endpoints to send and view data. This can be
 Data sent must be JSON, and in these formats:
 
 Create manufacturer or Update manufacturer:
-```
+```json
 {
   "name": "Chrysler"
 }
 ```
 This will return a JSON object like the following:
-```
+```json
 {
 	"href": "/api/manufacturers/1/",
 	"id": 1,
@@ -59,7 +58,7 @@ This will return a JSON object like the following:
 }
 ```
 When getting a list of the manufacturers, the JSON object will look like the following:
-```
+```json
 {
 	"manufacturers": [
 		{
@@ -83,7 +82,7 @@ When getting a list of the manufacturers, the JSON object will look like the fol
 Data sent must be JSON, and in these formats:
 
 Create models:
-```
+```json
 {
   "name": "Sebring",
   "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
@@ -91,7 +90,7 @@ Create models:
 }
 ```
 This will return a JSON object like the following:
-```
+```json
 {
 	"href": "/api/models/1/",
 	"id": 1,
@@ -107,7 +106,7 @@ This will return a JSON object like the following:
 The manufacturer field is a reference to the manufacturer that the model is linked to.
 
 When getting a list of the models, the JSON object will look like the following:
-```
+```json
 {
 	"models": [
 		{
@@ -126,14 +125,14 @@ When getting a list of the models, the JSON object will look like the following:
 ```
 Update model:
 -You can only update the name and/or picture url.
-```
+```json
 {
   "name": "Sebring",
   "picture_url": "picture.urlhere.com"
 }
 ```
 This will return the following JSON:
-```
+```json
 {
 	"href": "/api/models/1/",
 	"id": 1,
@@ -161,7 +160,7 @@ The vin is a unique number, and must be unique in order to create an autommobile
 Data sent must be JSON, and in these formats:
 
 Create Automobile:
-```
+```json
 {
   "color": "red",
   "year": 2012,
@@ -170,7 +169,7 @@ Create Automobile:
 }
 ```
 This will return a JSON object like the following:
-```
+```json
 {
 	"href": "/api/automobiles/1C3CC5FB2AN120174/",
 	"id": 1,
@@ -194,7 +193,7 @@ This will return a JSON object like the following:
 The model field is a reference to the model that the automobile is linked to.
 
 When getting a list of the models, the JSON object will look like the following:
-```
+```json
 {
 	"autos": [
 		{
@@ -223,7 +222,7 @@ When getting a list of the models, the JSON object will look like the following:
 Update Automobile:
 -You can only update the color and/or year of the automobile
 -You must input the correct vin to be able to update the automobile.
-```
+```json
 {
   "color": "blue",
   "year": 2023
@@ -243,7 +242,7 @@ Update Automobile:
 
 
 Create Technician: This will add a technician to the database. You will input the technicians' first name, last name, and employee id in the following format:
-```
+```json
 {
 	"first_name": "Fredfred",
 	"last_name": "Burger",
@@ -253,7 +252,7 @@ Create Technician: This will add a technician to the database. You will input th
 -Employee id can be any character, so feel free to use letters and numbers.
 
 This will give you the following JSON object:
-```
+```json
 {
 	"id": 1,
 	"first_name": "Fredfred",
@@ -264,7 +263,7 @@ This will give you the following JSON object:
 -The id field is an internal tracker for the specific technician. It is created when the technician is added to the system.
 
 List Technician: This will generate a list of technicians currently in the database. The response will look like the following:
-```
+```json
 {
 	"technicians": [
 		{
@@ -277,7 +276,7 @@ List Technician: This will generate a list of technicians currently in the datab
 }
 ```
 Get a specific Technician: This will grab the information for a specific technician, identified by the id field. The response will look like the following:
-```
+```json
 {
 	"id": 1,
 	"first_name": "Fredfred",
@@ -287,7 +286,7 @@ Get a specific Technician: This will grab the information for a specific technic
 ```
 
 Delete a Technician: This will delete a technician and their information from the database. When you delete the technician, you must specify the id field specific to them. The response will look like the following:
-```
+```json
 {
 	"id": null,
 	"first_name": "Fredfred",
@@ -307,7 +306,7 @@ The id field returns null, showing it has been removed from the database, as wel
 |Delete Specific Appointment | DELETE | http://localhost:8100/api/appointments/id/ |
 
 List appointment: This will generate a list of all the current appointments in the following response.
-```
+```json
 {
 	"appointments": [
 		{
@@ -331,7 +330,7 @@ List appointment: This will generate a list of all the current appointments in t
 The id is generated by the system on the appointment creation. The vin is the vin of the customers automobile. Customer is the name of the customer, and the date_time field is when the appointment will take place. The application takes this date_time object from the forms two inputs of date and time, and combines them for this. Reason is the reason for the service appointment, and status is pending until updated to be either finished or canceled. The technician field is the data for the technician assigned to the appointment. Finally, is_vip is either true or false depending on if the vin matches a vin number from the list of automobiles the dealership currently has or has sold. This is done with the Automobile VO, which pulls the vin number from the automobiles using a poller.
 
 Create Appointment: This will create an appointment. Use the following format for the JSON:
-```
+```json
 {
 	"vin": "42",
 	"customer": "Fredfred",
@@ -341,8 +340,8 @@ Create Appointment: This will create an appointment. Use the following format fo
 	"technician": 1
 }
 ```
-The status can be left blank, as teh following PUT requests will alter it. Technician is specified by the id of the technician. This will produce the following response:
-```
+The status can be left blank, as the following PUT requests will alter it. Technician is specified by the id of the technician. This will produce the following response:
+```json
 {
 	"id": 1,
 	"vin": "42",
@@ -362,12 +361,12 @@ The status can be left blank, as teh following PUT requests will alter it. Techn
 The id is automatically generated by the system when the appointment is created.
 
 Change appointment status to Finished: This will change the status of the appointment to Finished. It will return this response:
-```
+```json
 {
 	"id": 1,
 	"vin": "42",
 	"customer": "Fredfred",
-	"date_time": "3000-02-03T08:26:49+00:00"",
+	"date_time": "3000-02-03T08:26:49+00:00",
 	"reason": "Burger",
 	"status": "FINISHED",
 	"technician": {
@@ -375,19 +374,19 @@ Change appointment status to Finished: This will change the status of the appoin
 		"first_name": "test1",
 		"last_name": "test1",
 		"employee_id": "1"
-	}
-    "is_vip": true
+	},
+	"is_vip": true
 }
 
 ```
 
 Change appointment status to Canceled: This will change the status of the appointment to Canceled. It will return this response:
-```
+```json
 {
 	"id": 1,
 	"vin": "42",
 	"customer": "Fredfred",
-	"date_time": "3000-02-03T08:26:49+00:00"",
+	"date_time": "3000-02-03T08:26:49+00:00",
 	"reason": "Burger",
 	"status": "CANCELED",
 	"technician": {
@@ -395,12 +394,12 @@ Change appointment status to Canceled: This will change the status of the appoin
 		"first_name": "test1",
 		"last_name": "test1",
 		"employee_id": "1"
-	}
+	},
 	"is_vip": true
 }
 ```
 Delete appointment: This will delete the appointment at the given id. The response will look like this:
-```
+```json
 {
 	"id": null,
 	"vin": "654321",
@@ -418,20 +417,6 @@ Delete appointment: This will delete the appointment at the given id. The respon
 }
 ```
 
-### URLs and Ports
- - Put URLs and ports for services here
-​
-### Inventory API (Optional)
- - Put Inventory API documentation here. This is optional if you have time, otherwise prioritize the other services.
-​
-### Service API
- - Put Service API documentation here
-​
-### Sales API
- - Put Sales API documentation here
-​
-## Value Objects
- - Identification of value objects for each service goes here
 
 ## Sales microservice
 The Sales Microservice is able to create customers, salespeople and a sale. Customers and Salepeople are both included in the characteristics of a sale of automobiles. It also lists customers, salespeople, sales, and salespeople history. It should also poll from autmobile data by the VIN to create sales as well as salespeople history.
