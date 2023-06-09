@@ -33,7 +33,7 @@ function App(props) {
     const response = await fetch('http://localhost:8100/api/automobiles/')
       if (response.ok) {
         const data = await response.json();
-        setAutomobiles(data.automobiles)
+        setAutomobiles(data.autos)
       } else {
         console.error(response)
       }
@@ -130,7 +130,7 @@ async function loadCarModels() {
           <Route path="/models/new" element={<ModelsForm manufacturers={manufacturers} loadCarModels={loadCarModels} />} />
           <Route path="/technicians" element={<TechnicianList technicians={technicians} />}/>
           <Route path="/technicians/new" element={<TechnicianForm loadTechnicians={loadTechnicians} />} />
-          <Route path="/appointments" element={<AppointmentList loadAppointments={loadAppointments} automobiles={automobiles} appointments={appointments} />} />
+          <Route path="/appointments" element={<AppointmentList loadAppointments={loadAppointments} appointments={appointments} />} />
           <Route path="appointments/history" element={<ServiceList appointments={appointments} />} />
           <Route path="/appointments/new" element={<AppointmentForm loadAppointments={loadAppointments} technicians={technicians}/>} />
           <Route path="manufacturers" element={<ManufacturerList manufacturers={props.manufacturers} />} />

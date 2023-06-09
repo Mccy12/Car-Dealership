@@ -1,6 +1,8 @@
 function AppointmentList({ appointments, loadAppointments }) {
-
-
+    // loop through Automobiles
+    // grab the vin
+    // add it to list
+    // compare in mapping function if the appointment.vin is in automobile vin list
     return(
         <div>
         <h1>Service Appointments</h1>
@@ -18,6 +20,7 @@ function AppointmentList({ appointments, loadAppointments }) {
             </thead>
             <tbody>
                 {appointments.map(appointment => {
+                    if (appointment.status === "PENDING") {
                     let date = new Date(appointment.date_time).toLocaleDateString()
                     let time = new Date(appointment.date_time).toLocaleTimeString()
 
@@ -47,7 +50,6 @@ function AppointmentList({ appointments, loadAppointments }) {
 
 
                     return (
-
                         <tr key={appointment.id}>
                             <td>{ appointment.vin }</td>
                             <td>{ appointment.is_vip }</td>
@@ -63,6 +65,7 @@ function AppointmentList({ appointments, loadAppointments }) {
 
                         </tr>
                     );
+                }
                 })}
             </tbody>
         </table>
