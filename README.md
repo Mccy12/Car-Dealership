@@ -505,7 +505,7 @@ example output
 </br>
 </br>
 
-***SalesPersonRecord RESTful API endpoints***
+***Sales RESTful API endpoints***
 | Request Method  | Url                   | Action                            |
 | ----------------|:---------------------:| :--------------------------------------:|
 | GET             | /api/sales/     | List sales          |
