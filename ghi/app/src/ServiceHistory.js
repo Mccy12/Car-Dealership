@@ -7,7 +7,8 @@ function ServiceList({ appointments }) {
 
     return(
         <div>
-        <input type="text" placeholder="Search" className="Search" onChange={e=> setQuery(e.target.value)} />
+            <h1>Service History</h1>
+        <input  type="text" placeholder="Search" className="form-control" onChange={e=> setQuery(e.target.value)} />
         <table className="table table-striped">
             <thead>
                 <tr>
